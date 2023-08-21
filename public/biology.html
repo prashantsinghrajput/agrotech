@@ -10,6 +10,12 @@
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="assets/css/style-starter.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -113,7 +119,7 @@
                     Teachers interested in teaching this course in their class rooms are invited to explore our Academic High school program here – https://tauonline.tau.ac.il/online-highschool
                 </p>
                 <div class="mt-5 mx-auto text-more text-center pt-lg-4">
-                    <a href="#" class="btn btn-style">Register</a>
+                    <a class="btn btn-style" href="#ex1" rel="modal:open">Register</a>
                 </div>
                 </div>
 
@@ -121,7 +127,39 @@
         </div>
     </section>
     <!-- //about 3grids section -->
+    <div id="ex1" class="modal" style="height: 60%;">
+        <h2>Course Enrollment Form</h2>
 
+    <form id="enrollmentForm">
+
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber"><br><br>
+
+        <label for="courseSelect">Select Course:</label>
+        <select id="courseSelect" name="courseSelect" required>
+            <option value="course1">Course 1</option>
+            <option value="course2">Course 2</option>
+            <option value="course3">Course 3</option>
+            <!-- Add more courses as options if required -->
+        </select><br><br>
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required><br><br>
+
+        
+        <label for="additionalNotes">Additional Notes:</label><br>
+        <textarea id="additionalNotes" name="additionalNotes" rows="4" cols="50"></textarea><br><br>
+
+        <input type="submit" value="Enroll" onclick="submitForm()">
+    </form>
+        <a href="#" rel="modal:close">Close</a>
+      </div>
     <!-- //testimonials section -->
 
     <!-- footer -->
@@ -208,6 +246,31 @@
         function topFunction() {
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
+        }
+
+        function submitForm() {
+            var form = document.getElementById('enrollmentForm');
+            
+            // Simple form validation
+            if (!form.checkValidity()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please fill out all required fields correctly.',
+                });
+                return;
+            }
+
+            // Assuming the form data is valid, you would send it to your server here using AJAX or another method
+            // For this example, we're just showing a success alert
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'You have successfully enrolled in the course.',
+            });
+            
+            // Optionally, you can reset the form after submission
+            // form.reset();
         }
     </script>
     <!-- //move top -->
